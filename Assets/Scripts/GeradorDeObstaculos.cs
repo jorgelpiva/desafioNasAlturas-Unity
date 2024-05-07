@@ -9,6 +9,12 @@ public class GeradorDeObstaculos : MonoBehaviour
     [SerializeField]
     private GameObject manualDeInstrucoes;
     private float cronometro;
+    private GameObject aviao;
+
+    private void Start()
+    {
+        aviao = GameObject.Find("aviao1");
+    }
 
     private void Awake(){
         this.cronometro = this.tempoParaGerar;
@@ -16,13 +22,19 @@ public class GeradorDeObstaculos : MonoBehaviour
 
     void Update()
     {
-        //Quando que eu quero gerar? Tempo
-        this.cronometro -= Time.deltaTime;
-        if(this.cronometro < 0 ){
-            //Onde eu vou gerar? Na posição do meu gerador
-            GameObject.Instantiate(this.manualDeInstrucoes, this.transform.position, Quaternion.identity);
-            this.cronometro = this.tempoParaGerar;
+        bool isPlaneAlive = aviao.GetComponent<Aviao>().isAlive();
+
+        if (isPlaneAlive)
+        {
+            //Quando que eu quero gerar? Tempo
+            this.cronometro -= Time.deltaTime;
+            if (this.cronometro < 0)
+            {
+                //Onde eu vou gerar? Na posição do meu gerador
+                GameObject.Instantiate(this.manualDeInstrucoes, this.transform.position, Quaternion.identity);
+                this.cronometro = this.tempoParaGerar;
+            }
+            //Como Gerar Obstaculos?
         }
-        //Como Gerar Obstaculos?
     }
 }

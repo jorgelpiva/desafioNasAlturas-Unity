@@ -9,6 +9,12 @@ public class Piso : MonoBehaviour
     private Vector3 posicaoInicial ;
     private float tamanhoDaImagem;
     private float tamanhoRealDaImagem;
+    private GameObject gObj;
+
+    private void Start()
+    {
+        gObj = GameObject.Find("aviao1");
+    }
 
     private void Awake(){
         this.posicaoInicial = this.transform.position;
@@ -19,9 +25,13 @@ public class Piso : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {  
-        float deslocamento = Mathf.Repeat(this.velocidade * Time.time, this.tamanhoRealDaImagem);
-        this.transform.position = this.posicaoInicial + Vector3.left * deslocamento;
+    {
+        bool isPlaneAlive = gObj.GetComponent<Aviao>().isAlive();
 
+        if (isPlaneAlive)
+        {
+            float deslocamento = Mathf.Repeat(this.velocidade * Time.time, this.tamanhoRealDaImagem);
+            this.transform.position = this.posicaoInicial + Vector3.left * deslocamento;
+        }
     }
 }

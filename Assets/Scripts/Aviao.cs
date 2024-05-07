@@ -6,24 +6,41 @@ public class Aviao : MonoBehaviour
 {
     private Rigidbody2D fisica;
     [SerializeField]
-    private float forca = 3;
+    private float forca = 20;
+    private bool alive = true;
+
+    public bool isAlive()
+    {
+        return alive;
+    }
 
     private void Awake(){
-        this.fisica = this.GetComponent<Rigidbody2D>();
+        fisica = this.GetComponent<Rigidbody2D>();
     }
-    
+
     // Update is called once per frame
     private void Update()
     {
-       if(Input.GetButtonDown("Fire1")){
-            this.Impulsionar();
-       } 
+       if (fisica.bodyType != RigidbodyType2D.Static && isAlive())
+        {
+            if (Input.GetButtonDown("Fire1"))
+            {
+                this.Impulsionar();
+            }
+        }
     }
 
     private void Impulsionar(){
-        this.fisica.velocity = Vector2.zero;
-        this.fisica.AddForce(Vector2.up * this.forca , ForceMode2D.Impulse);
+        fisica.velocity = Vector2.zero;
+        fisica.AddForce(Vector2.up * this.forca , ForceMode2D.Impulse);
     }
 
-
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.name == "chao" ||
+            collision.gameObject.name == "Obstaculo(Clone)")
+        {
+            alive = false;
+        }
+    }
 }
