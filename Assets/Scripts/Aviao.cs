@@ -28,11 +28,16 @@ public class Aviao : MonoBehaviour
     private void Update()
     {
        if (fisica.bodyType != RigidbodyType2D.Static && isAlive())
-        {
+       {
             if (Input.GetButtonDown("Fire1"))
             {
                 this.Impulsionar();
             }
+       }
+
+        else
+        {
+            fisica.constraints = RigidbodyConstraints2D.FreezePosition;
         }
     }
 
