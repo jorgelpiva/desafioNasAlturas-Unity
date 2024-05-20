@@ -8,6 +8,7 @@ public class Aviao : MonoBehaviour
     [SerializeField]
     private float forca = 20;
     private bool alive = true;
+    private int pontuacao = 0;
 
     public bool isAlive()
     {
@@ -16,7 +17,12 @@ public class Aviao : MonoBehaviour
 
     private void Awake(){
         fisica = this.GetComponent<Rigidbody2D>();
+        
     }
+
+    public void pontuar() { pontuacao += 100; }
+
+    public int checarPontuacao() { return pontuacao; }
 
     // Update is called once per frame
     private void Update()

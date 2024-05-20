@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 public class Obstaculo : MonoBehaviour
@@ -8,19 +7,34 @@ public class Obstaculo : MonoBehaviour
     private float velocidade = 0.5f ;
     [SerializeField] private float variacaoPosicaoY;
     private GameObject aviao;
+    private bool pontuou = false;
+    private GameObject scoreTextObj;
 
     private void Start()
     {
         aviao = GameObject.Find("aviao1");
+        scoreTextObj = GameObject.FindWithTag("Score");
     }
 
     private void Awake(){
-        this.transform.Translate(Vector3.up * Random.Range(-variacaoPosicaoY, variacaoPosicaoY));
+        this.transform.Translate(Vector3.up * UnityEngine.Random.Range(-variacaoPosicaoY, variacaoPosicaoY));
     }
 
     private void Update()
     {
-        bool isPlaneAlive = aviao.GetComponent<Aviao>().isAlive();
+        Aviao aviaoComp = aviao.GetComponent<Aviao>();
+
+        float x2Aviao = aviao.transform.position.x;
+        float x1Aviao = x2Aviao - aviao.GetComponent<SpriteRenderer>().bounds.size.x;
+
+        if (!pontuou && x1Aviao >= this.transform.position.x + 2.00 && x1Aviao < this.transform.position.x + 4.00) {
+            TMPro.TextMeshProUGUI scoreTextMesh = scoreTextObj.GetComponent<TMPro.TextMeshProUGUI>();
+            aviaoComp.pontuar();
+            scoreTextMesh.text = "Score: " + aviaoComp.checarPontuacao();
+            pontuou = true;
+        }
+
+        bool isPlaneAlive = aviaoComp.isAlive();
 
         if (isPlaneAlive)
         {
