@@ -11,6 +11,8 @@ public class Piso : MonoBehaviour
     private float tamanhoRealDaImagem;
     private GameObject gObj;
 
+
+
     private void Start()
     {
         gObj = GameObject.Find("aviao1");

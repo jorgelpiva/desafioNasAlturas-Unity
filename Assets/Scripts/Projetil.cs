@@ -1,7 +1,9 @@
-using System;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class Obstaculo : MonoBehaviour
+
+public class Projetil : MonoBehaviour
 {
     [SerializeField]
     private float velocidade = 0.5f ;

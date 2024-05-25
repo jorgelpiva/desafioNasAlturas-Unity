@@ -364,7 +364,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   velocidade: 5
-  variacaoPosicaoY: 1
+  variacaoPosicaoY: 2
 --- !u!50 &6794910967908977379
 Rigidbody2D:
   serializedVersion: 4
