@@ -10,6 +10,7 @@ public class Obstaculo : MonoBehaviour
     private bool pontuou = false;
     private GameObject scoreTextObj;
 
+
     private void Start()
     {
         aviao = GameObject.Find("aviao1");
@@ -18,6 +19,7 @@ public class Obstaculo : MonoBehaviour
 
     private void Awake(){
         this.transform.Translate(Vector3.up * UnityEngine.Random.Range(-variacaoPosicaoY, variacaoPosicaoY));
+
     }
 
     private void Update()
@@ -32,6 +34,7 @@ public class Obstaculo : MonoBehaviour
             aviaoComp.pontuar();
             scoreTextMesh.text = "Score: " + aviaoComp.checarPontuacao();
             pontuou = true;
+            
         }
 
         bool isPlaneAlive = aviaoComp.isAlive();

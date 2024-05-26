@@ -15,6 +15,7 @@ public class Aviao : MonoBehaviour
     [SerializeField]
     private GameObject imagemGameOver;
     private GameObject scoreTextObj;
+    private AudioSource audioPontuacao;
     
 
     public bool isAlive()
@@ -27,11 +28,15 @@ public class Aviao : MonoBehaviour
 
         this.posicaoInicial = this.transform.position;
         scoreTextObj = GameObject.FindWithTag("Score");
+        this.audioPontuacao = this.GetComponent<AudioSource>();
         
         
     }
 
-    public void pontuar() { pontuacao += 100; }
+    public void pontuar() { 
+        pontuacao += 100; 
+        this.audioPontuacao.Play();
+        }
 
     public int checarPontuacao() { return pontuacao; }
 
