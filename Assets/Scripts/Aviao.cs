@@ -14,6 +14,8 @@ public class Aviao : MonoBehaviour
 
     [SerializeField]
     private GameObject imagemGameOver;
+    private GameObject scoreTextObj;
+    
 
     public bool isAlive()
     {
@@ -24,6 +26,8 @@ public class Aviao : MonoBehaviour
         fisica = this.GetComponent<Rigidbody2D>();
 
         this.posicaoInicial = this.transform.position;
+        scoreTextObj = GameObject.FindWithTag("Score");
+        
         
     }
 
@@ -73,12 +77,14 @@ public class Aviao : MonoBehaviour
             alive = true;
             this.DestruirObstaculos();
             this.imagemGameOver.SetActive(false);
-            this.checarPontuacao() ;
             this.transform.position = this.posicaoInicial;
             fisica.constraints = RigidbodyConstraints2D.None;
             transform.rotation = Quaternion.identity;
             fisica.velocity = Vector2.zero;
             fisica.velocity = Vector3.zero;
+            fisica.constraints = RigidbodyConstraints2D.FreezeRotation | RigidbodyConstraints2D.FreezePositionX;
+            TMPro.TextMeshProUGUI scoreTextMesh = scoreTextObj.GetComponent<TMPro.TextMeshProUGUI>();
+            scoreTextMesh.text = "Score: " +  this.checarPontuacao() ;
         }
 
         private void DestruirObstaculos(){

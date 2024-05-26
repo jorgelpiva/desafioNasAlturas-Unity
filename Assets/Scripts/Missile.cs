@@ -9,13 +9,10 @@ public class Missile : MonoBehaviour
     private float velocidade = 0.5f ;
     [SerializeField] private float variacaoPosicaoY;
     private GameObject aviao;
-    private bool pontuou = false;
-    private GameObject scoreTextObj;
 
     private void Start()
     {
         aviao = GameObject.Find("aviao1");
-        scoreTextObj = GameObject.FindWithTag("Score");
     }
 
     private void Awake(){
@@ -26,15 +23,6 @@ public class Missile : MonoBehaviour
     {
         Aviao aviaoComp = aviao.GetComponent<Aviao>();
 
-        float x2Aviao = aviao.transform.position.x;
-        float x1Aviao = x2Aviao - aviao.GetComponent<SpriteRenderer>().bounds.size.x;
-
-        if (!pontuou && x1Aviao >= this.transform.position.x + 2.00 && x1Aviao < this.transform.position.x + 4.00) {
-            TMPro.TextMeshProUGUI scoreTextMesh = scoreTextObj.GetComponent<TMPro.TextMeshProUGUI>();
-            aviaoComp.pontuar();
-            scoreTextMesh.text = "Score: " + aviaoComp.checarPontuacao();
-            pontuou = true;
-        }
 
         bool isPlaneAlive = aviaoComp.isAlive();
 
